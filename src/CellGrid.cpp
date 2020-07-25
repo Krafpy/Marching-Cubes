@@ -48,8 +48,8 @@ void CellGrid::fillGrid(FastNoise& noise, int octaves, float lacunarity, float p
                 }
 
 
-                // TODO : add more parameters to allow configurable patterns such as tesselation
-                // commented hardcode example below
+                // TODO : add more parameters to allow configurable patterns such as terracing
+                // commented hardcode example below:
 
                 /*y = (float)j * 0.1f - 0.1f * height/2.f;
                 noiseValue = -(y + 1.f) + noiseValue * 1.9f + fmod(y, 0.9f) * 1.f;*/
