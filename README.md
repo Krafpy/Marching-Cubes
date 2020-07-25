@@ -15,7 +15,7 @@ This C++ code uses [GLFW3](https://www.glfw.org/) and [GLEW](http://glew.sourcef
 
 ## Improvements ideas
 - [ ] Complete the `CellGrid::fillGrid()` method to allow more advanced patterns (e.g. floored terrain, terracing);
-- [ ] Use compute shaders to generate the noise the cubes/vertices;
+- [ ] Use compute shaders to generate the noise and the cubes/vertices;
 - [ ] Add UI to configure the noise function
 
 ## Project ideas
