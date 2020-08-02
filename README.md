@@ -11,7 +11,7 @@ This C++ code uses [GLFW3](https://www.glfw.org/) and [GLEW](http://glew.sourcef
 * Drag the mouse to rotate around the generated shape;
 * `space` to generate a new random shape;
 * `A` to show/hide axes (red for x, yellow for y, blue for z);
-* `Q` to show/hide wireframe box.
+* `B` to show/hide wireframe box.
 
 ## Improvements ideas
 - [ ] Complete the `CellGrid::fillGrid()` method to allow more advanced patterns (e.g. floored terrain, terracing);
