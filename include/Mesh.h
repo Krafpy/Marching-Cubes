@@ -24,7 +24,7 @@ class Mesh
         vector<list<unsigned int>> sharedTriangles;
 
         Mesh();
-        void generateMesh(CubeGrid &cubeGrid, unsigned int minTriangleCount);
+        void generateMesh(CubeGrid& cubeGrid, unsigned int minTriangleCount);
         void clear();
         // get the vertex and indices arrays to load in the buffers
         float* getVertexArray();
@@ -35,7 +35,7 @@ class Mesh
 
     private:
         // create the triangles of a cube according to its configuration
-        void triangulateCube(Cube cube);
+        void triangulateCube(Cube& cube);
         void calculateNormals();
         // create an adjacency list of the shared triangles by each vertex
         void assignSharedTriangles();
