@@ -51,6 +51,9 @@ void Camera::updatePos(float mouseX, float mouseY, float deltaTime)
 
 void Camera::updateDistance(float offset, float minDist, float maxDist)
 {
+    // constrain offset to [-1;1]
+    offset = (offset < 0.f) ? -1.f : (offset > 0.f) ? 1.f : 0.f;
+
     distanceFromCenter += -offset * zoomSpeed;
 
     if(distanceFromCenter < minDist && offset > 0.f)
