@@ -13,9 +13,6 @@
 #include <Mesh.h>
 #include <Camera.h>
 
-
-#define BUFFER_OFFSET(i) ((void*)(i))
-
 // 3D scalar grid size
 
 #define GRID_WIDTH      50
@@ -44,6 +41,7 @@
 
 
 using namespace std;
+
 
 // generator class instances
 static FastNoise noise;
@@ -202,21 +200,21 @@ int main(int argc, char *argv[])
                   0.f, 0.f, 0.f,
                   0.f, 1.f, 0.f);
 
+        // draw the mesh from the buffers
+
         glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_LIGHTING);
         glColor3f(1.f, 1.f, 1.f);
 
-        // draw the mesh from the buffers
-
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glEnableClientState(GL_VERTEX_ARRAY);
-        glVertexPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
+        glVertexPointer(3, GL_FLOAT, 0, (void*)(0));
 
         glEnableClientState(GL_NORMAL_ARRAY);
-        glNormalPointer(GL_FLOAT, 0, BUFFER_OFFSET(normalsOffset));
+        glNormalPointer(GL_FLOAT, 0, (void*)(normalsOffset));
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glDrawElements(GL_TRIANGLES, iboCount, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
+        glDrawElements(GL_TRIANGLES, iboCount, GL_UNSIGNED_INT, (void*)(0));
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_NORMAL_ARRAY);
@@ -348,7 +346,7 @@ static void generateMap()
     // fill the 3D scalar field
     cellGrid.fillGrid(noise, OCTAVES, LACUNARITY, PERSISTANCE, NOISE_SCALE);
     // generate the cube grid according to that scalar field
-    cubeGrid = CubeGrid(cellGrid, CUBE_SIZE, SURFACE_LEVEL, MIN_REGION_SIZE);
+    cubeGrid.generateGrid(cellGrid, CUBE_SIZE, SURFACE_LEVEL, MIN_REGION_SIZE);
     cubeGrid.marchCubes(mesh.vertices);
 
     mesh.generateMesh(cubeGrid, MIN_REGION_SIZE);
@@ -360,7 +358,7 @@ static void generateMap()
     auto duration = chrono::duration_cast<chrono::milliseconds>(finishTime - startTime);
 
     cout << ": seed " << noise.GetSeed();
-    cout << " - " << mesh.vertices.size() << " vertices ";
+    cout << " - " << mesh.vertices.size() << " vertices, ";
     cout << mesh.triangles.size() << " triangles";
     cout << " - " << duration.count() << "ms" << endl;
 }
@@ -394,5 +392,3 @@ static void generateBuffers()
 
     delete[] triangles;
 }
-
-
