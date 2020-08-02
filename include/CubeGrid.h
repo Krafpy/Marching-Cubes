@@ -24,7 +24,7 @@ class CubeGrid
 
         CubeGrid();
         // Generates the controls nodes from the cell grid and filters small regions
-        CubeGrid(CellGrid& cellGrid, float _cubeSize, float _surfaceLevel, unsigned int minRegionSize);
+        void generateGrid(CellGrid& cellGrid, float _cubeSize, float _surfaceLevel, unsigned int minRegionSize);
         // Generates each cubes and their edge vertices
         void marchCubes(vector<Vertex>& vertices);
         void clear();

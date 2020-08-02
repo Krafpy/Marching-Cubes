@@ -14,15 +14,17 @@ CubeGrid::CubeGrid()
 
 }
 
-CubeGrid::CubeGrid(CellGrid& cellGrid, float _cubeSize, float _surfaceLevel, unsigned int minRegionSize) :
-    width(cellGrid.width-1),
-    height(cellGrid.height-1),
-    depth(cellGrid.depth-1),
-    cubeSize(_cubeSize),
-    surfaceLevel(_surfaceLevel)
+void CubeGrid::generateGrid(CellGrid& cellGrid, float _cubeSize, float _surfaceLevel, unsigned int minRegionSize)
 {
     // Calculate the coordinates of each cube vertex (i.e. control nodes)
     // First calculate the coordinates of each cells
+
+    width = cellGrid.width - 1;
+    height = cellGrid.height - 1;
+    depth = cellGrid.depth - 1;
+
+    cubeSize = _cubeSize;
+    surfaceLevel = _surfaceLevel;
 
     controlNodes = new ControlNode**[cellGrid.width];
     for(int i = 0; i < cellGrid.width; i++){
@@ -46,6 +48,7 @@ CubeGrid::CubeGrid(CellGrid& cellGrid, float _cubeSize, float _surfaceLevel, uns
 
 void CubeGrid::ignoreSmallRegions(CellGrid& cellGrid, unsigned int minNodeCount)
 {
+    // Removes small regions of control nodes to avoid useless small terrain features
     // Since some small region can still be connected to bigger ones, a similar
     // process on the calculated edge vertices will be necessary.
     // This step though helps to reduce the final number of vertices
@@ -62,7 +65,7 @@ void CubeGrid::ignoreSmallRegions(CellGrid& cellGrid, unsigned int minNodeCount)
         }
     }
 
-    vector<Coord> regionNodes;
+    vector<Coord> regionNodes; // stores the nodes of a particular region
 
     for(int i = 0; i < cellGrid.width; i++){
         for(int j = 0; j < cellGrid.height; j++){
@@ -243,7 +246,7 @@ void CubeGrid::clear(){
             delete[] cubes[i][j];
             delete[] controlNodes[i][j];
         }
-        delete cubes[i];
+        delete[] cubes[i];
         delete[] controlNodes[i];
     }
     delete[] cubes;

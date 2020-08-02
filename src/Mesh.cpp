@@ -33,6 +33,7 @@ void Mesh::generateMesh(CubeGrid& cubeGrid, unsigned int minTriangleCount)
     if(minTriangleCount > 0){
         ignoreSmallRegions(minTriangleCount);
         // reassign sharing because the triangles vector may have changed
+        sharedTriangles.clear();
         assignSharedTriangles();
     }
 
@@ -75,7 +76,6 @@ void Mesh::calculateNormals()
 
 void Mesh::assignSharedTriangles()
 {
-    sharedTriangles.clear();
     sharedTriangles.resize(vertices.size());
 
     for(unsigned int i = 0; i < triangles.size(); i++){
@@ -85,7 +85,7 @@ void Mesh::assignSharedTriangles()
     }
 }
 
-void Mesh::triangulateCube(Cube cube)
+void Mesh::triangulateCube(Cube& cube)
 {
     const int *triConfig = triTable[cube.configuration];
 
