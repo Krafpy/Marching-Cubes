@@ -1,6 +1,6 @@
 # Marching-Cubes
 This project is inspired from Sebastian Lague's [marching squares](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eZgMK_DT5_biRkWXftAOf9) and [marching cubes](https://www.youtube.com/watch?v=M3iI2l0ltbE) videos, as well as Coding Train's *Coding in the Cabana* video on this topic.
-Feel free to add any contribution.
+Feel free to add any contribution. **An improved version using compute shaders is available [here](https://github.com/Krafpy/Boids-and-Marching-Cubes).**
 
 ![Screenshot](/screenshots/screenshot5.PNG)
 
